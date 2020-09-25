@@ -1,0 +1,94 @@
+1.MAKING CONTROLLER
+	1.1 Create a controller File nameded with the name of controller class name
+	    and then add the code on the Controller file
+	1.2 Then make the controller with this code
+	    	<?php
+			class master extends Controller
+				{
+        				function __construct()
+        					{
+          						$modelObject=$this->loadModel('loginModel');
+          						$this->object_model=$modelObject;
+        					}
+							function masterdata($data,$data2)
+        					{
+                					$datas=$this->object_model->success($data);
+                					$this->loadView('login',$data2);
+        					} 
+				}
+		?>
+	1.3  Loading the view to the controller
+	         $this->loadView('login',$data2);
+                 Here login is the view page name and $data2 is the parameter that passed to View
+	1.4 Loading the Model to the controller
+		 $modelObject=$this->loadModel('loginModel');
+          	 $this->object_model=$modelObject;
+                 here loginMOdel is the model we loaded that to the Controller
+                 the model is loaded to the variable $modelObject
+                 and set $this->object_model=$modelObject;
+                 By this we can access the same model at all functions in the controller
+        1.5  Calling the Model method
+                 $datas=$this->object_model->success($data);
+                 Here success is the function in the model $data is the parameter passed to the function of the model
+2.MAKING Model
+	2.1 Create a Model File nameded with the name of Model class name
+	    and then add the code on the Controller file	     
+	    2.2 Then make the Model with this code
+		 <?php
+			class loginModel extends Model
+				{
+   					function success($data)
+   						{
+			
+                        				$sql="select * from TenderLoadData";
+                        				$datas=$this->fetch($sql);
+                        				return $datas;
+   				}
+
+				}
+		?>
+            2.3   Here Success is the name of model class and $data is the parameter from Controller
+            2.3   DB Functions
+			2.3.1   Execute Query
+                                This function execute($query)  is to execute a query 
+				This can call in Model using this code $this->fetch($query);
+                        2.3.2   Insert Data
+                                function insert is using to insert data
+				 This can call in Model using this code insert($tableName,$dataArray);
+                                Here $tableNAme is the name of table that we want to insert data
+                                $dataArray i sthe array with data want to insert
+                                The array key must the field name of tabel
+                             	The array value must be the data want to insert
+                                Eg:array('password'=>123)
+                        2.3.3   Delete Data
+                                function delete is using to delete data
+                                This can call in Model using this code delete($tableName,$whereCondition)
+                                delete($tableName,$whereCondition);
+                                $where condition is the where condition array
+                                eg : $whereCondition=array('ip'=>'22','summary' => '33','type'=>'8');
+                        2.3.4   Update data
+                                update($tableName,$updatingdata,$whereCondition);
+                                here $updatingdata AND $whereCondition must array The array key must the field name of tabel
+                             	The array value must be the data want to update and where condition
+                       2.3.5    Fetch Data
+                                fetch is the function that can use in model to fetch the data
+ 				$sql="select * from TenderLoadData";
+                                $datas=$this->fetch($sql);
+3	SESSIONS
+        3.1  LOAD SESSIONS
+              session::load();  use this to start session
+        3.2  SET SESSION
+             session::set('Value','Sessionname');  use this to set the session'
+	3.4  GET SESSION
+	     session::get('Session name'); use this to get the session data
+	3.5  REMOVE SESSION
+             session::remove(); use this to remove the session
+        3.6  DISTROY THE SESSION
+	     session::destory(); use this to destory the session
+
+4      REQUESTS
+       4.1   POST
+	     ACCEPT THE POSTED DATA
+	     $posted=request::post();
+             OR with a key
+             $posted=request::post('password'); or Like anything

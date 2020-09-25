@@ -1,0 +1,16 @@
+<?php
+require('master/security.php');
+require('master/validation.php');
+require('master/captcha.php');
+require('master/requestHandler.php');
+require('master/sessionHandler.php');
+require('Config/urlConfig.php');
+require('master/dbConnection.php');
+require('Config/dbConfig.php');
+require('master/modelHandler.php');
+require('master/router.php');
+require('master/dispatcher.php');
+require('master/messages.php');
+require('master/fileUpload.php');
+Dispatch::findController(Route::routing());
+?>
